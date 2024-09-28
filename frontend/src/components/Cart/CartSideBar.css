@@ -1,0 +1,151 @@
+/* Cart Icon */
+.cart-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #ffcc00;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 1001;
+  }
+  
+  /* Sidebar */
+  .cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px; /* Initially hidden */
+    width: 400px;
+    height: 100%;
+    background-color: #fff;
+    transition: right 0.3s ease;
+    box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .cart-sidebar.open {
+    right: 0; /* Slide in */
+  }
+  
+  /* Cart Header */
+  .cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+  }
+  
+  /* Balance Section */
+  .balance-section {
+    margin: 20px 0;
+  }
+  
+  .balance-card {
+    background-color: #ffcc00;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .balance-amount {
+    color: #fff;
+  }
+  
+  .balance-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .balance-btn {
+    background-color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Address Section */
+  .address-section {
+    margin: 20px 0;
+  }
+  
+  .address-btn, .change-btn {
+    background-color: #ffcc00;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .change-btn {
+    background-color: transparent;
+    color: #ffcc00;
+    font-size: 14px;
+  }
+  
+  /* Order Menu */
+  .order-menu {
+    margin: 20px 0;
+  }
+  
+  .order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .order-item img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  /* Order Summary */
+  .order-summary {
+    margin-top: 20px;
+  }
+  
+  .coupon-btn, .checkout-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .coupon-btn {
+    background-color: #f7f7f7;
+  }
+  
+  .checkout-btn {
+    background-color: #ffcc00;
+    color: white;
+  }
+  
+  /* Overlay */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  

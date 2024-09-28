@@ -1,0 +1,90 @@
+.popular-dishes-container {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .popular-dishes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .popular-dishes-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .view-all {
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffb400;
+    text-decoration: none;
+  }
+  
+  .dishes-list {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .dish-card {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .dish-discount {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #ff6b6b;
+    color: #fff;
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 5px;
+  }
+  
+  .dish-image {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  
+  .dish-name {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .dish-rating {
+    color: #ffb400;
+    font-size: 14px;
+  }
+  
+  .dish-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .add-to-cart-btn {
+    background-color: #ffb400;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .add-to-cart-btn:hover {
+    background-color: #ffa800;
+  }
+  

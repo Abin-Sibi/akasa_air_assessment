@@ -1,0 +1,200 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.home {
+    width: 100%;
+    padding: 20px;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+    background-color: #f9f9f9;
+}
+
+.hero-text {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.hero-text h1 {
+    font-size: 48px;
+    font-weight: 700;
+    color: #333;
+}
+
+.hero-text h1 span {
+    color: #ff5a3c;
+}
+
+.hero-text p {
+    margin: 20px 0;
+    font-size: 18px;
+    color: #555;
+}
+
+.hero-buttons {
+    margin-top: 20px;
+}
+
+.get-started-btn, .watch-video-btn {
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: none;
+    font-size: 16px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.get-started-btn {
+    background-color: #ff5a3c;
+    color: white;
+}
+
+.watch-video-btn {
+    background-color: #f1f1f1;
+    color: #555;
+}
+
+.customer-rating {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.customer-rating img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.customer-rating div {
+    margin-left: 10px;
+}
+
+.rating {
+    font-weight: bold;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Hero Image and Food Card */
+.hero-image {
+    position: relative;
+    flex: 1;
+}
+
+.hero-image img {
+    max-width: 100%;
+    border-radius: 20px;
+}
+
+.food-card {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+}
+
+.food-card img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.food-info h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.food-info p {
+    margin: 0;
+    color: #ff5a3c;
+    font-weight: bold;
+}
+
+/* Person Info */
+.person-info {
+    position: absolute;
+    bottom: 90px;
+    left: 10px;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.person-info p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.person-info span {
+    color: #777;
+    font-size: 12px;
+}
+
+/* Services Section */
+.services {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.services h2 {
+    color: #ff5a3c;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.services h3 {
+    color: #333;
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.service-cards {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.service-card {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    text-align: center;
+}
+
+.service-card i {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.service-card h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.service-card p {
+    color: #777;
+    font-size: 16px;
+}

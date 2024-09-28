@@ -1,0 +1,133 @@
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #fff;
+    padding: 80px 20px 20px 20px;
+    position: fixed; /* Fix the sidebar */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid #e0e0e0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+.sidebar.collapsed {
+    width: 80px; /* Reduced width when collapsed */
+}
+
+/* Sidebar header with logo and toggle button */
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h2 {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+    transition: font-size 0.3s ease;
+}
+
+.logo span {
+    color: #ffb400;
+}
+
+.menu {
+    margin-top: 40px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    color: #7a7a7a;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.menu-item i.icon {
+    margin-right: 15px;
+    font-size: 20px;
+}
+
+.menu-item:hover {
+    color: #ffb400;
+}
+
+.menu-item.active {
+    color: #ffb400;
+    font-weight: bold;
+}
+
+.sidebar.collapsed .menu-item span {
+    opacity: 0; /* Hide the text when collapsed */
+}
+
+.upgrade-card {
+    background-color: #ffe08a;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 120px; /* Set a fixed height for the upgrade card */
+}
+
+.upgrade-card p {
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.upgrade-btn {
+    background-color: #ffb400;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upgrade-btn:hover {
+    background-color: #ffa800;
+}
+
+/* Logout card when sidebar is collapsed */
+.logout-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffe08a;
+    border-radius: 10px;
+    margin-top: 40px;
+    height: 120px; /* Maintain the same height as the upgrade card */
+}
+
+.logout-icon {
+    font-size: 24px;
+    color: #333;
+}
+
+/* Toggle button as arrow icon beside the logo */
+.toggle-btn {
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+    margin-left: 10px;
+    transition: transform 0.3s ease;
+}
+
+.toggle-btn:hover {
+    color: #ffb400;
+}

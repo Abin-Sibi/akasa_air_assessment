@@ -1,0 +1,20 @@
+.layout{
+    display: flex;
+    flex-direction: row;
+}
+
+.content {
+    transition: margin-left 0.3s ease;
+    padding: 20px;
+    background-color: #f9f9f9;
+    height: 100vh;
+    overflow-y: auto; /* Enable scrolling for the content */
+}
+
+.content-collapsed {
+    margin-left: 50px; /* Adjust based on your collapsed sidebar width */
+}
+
+.not-collapsed{
+    margin-left: 250px;
+}

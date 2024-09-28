@@ -1,0 +1,30 @@
+/* Header.css */
+.header {
+    position: fixed; /* Keep the header at the top */
+    top: 0;
+    right: 0; /* Align to the right */
+    width: 25vw; /* Set width to half of the viewport width */
+    background-color: transparent; /* Transparent background */
+    padding: 15px 30px; /* Add some padding */
+    display: flex; /* Use flexbox for alignment */
+    justify-content: flex-end; /* Align items to the right */
+    align-items: center; /* Center items vertically */
+    z-index: 1000; /* Ensure it stays above other content */
+}
+
+.header-content {
+    display: flex;
+    flex-direction: row;
+    gap:20px
+}
+
+.welcome-message {
+    font-size: 16px; /* Adjust font size as needed */
+    color: #bd3333; /* Change color based on your design */
+}
+
+.icon {
+    color: #9c1c1c; /* Change color based on your design */
+    font-size: 20px; /* Adjust icon size */
+    cursor: pointer; /* Change cursor to pointer */
+}
