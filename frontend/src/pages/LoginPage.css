@@ -1,0 +1,33 @@
+.lbuttons{
+    width: 200px;
+    padding: 10px;
+    background-color: #ffcf22;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin:-10px;
+}
+
+.lbuttons:hover {
+    background-color: #e6b60c;
+  }
+
+.loginPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically centers the content */
+    align-items: center; /* Horizontally centers the content */
+    height: 100vh; /* Full viewport height to ensure vertical centering */
+}
+
+.loginPageBox{
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}

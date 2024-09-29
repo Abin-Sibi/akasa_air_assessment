@@ -1,0 +1,74 @@
+/* Container for the login page */
+.adminlogin-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* margin-top: 100px;
+    margin: 100px auto; */
+    background-color: #f0f0f0;
+  }
+  
+  /* Login box */
+  .adminlogin-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+  }
+  
+  /* Heading for login */
+  .login-box h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Form group (input and label) */
+  .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  /* Label */
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* Input fields */
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  /* Submit button */
+  .submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff5722;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  /* Button hover effect */
+  .submit-button:hover {
+    background-color: #e64a19;
+  }
+  
+  /* Error message styling */
+  .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
