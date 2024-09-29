@@ -36,9 +36,6 @@ const PopularDishes = () => {
     <div className="popular-dishes-container">
       <div className="popular-dishes-header">
         <h2>Popular Dishes</h2>
-        <a href="#" className="view-all">
-          View all &gt;
-        </a>
       </div>
       <div className="dishes-list">
         {popularDishes.map((dish) => (
@@ -48,7 +45,6 @@ const PopularDishes = () => {
             <h3 className="dish-name">{dish.name}</h3>
             <div className="dish-rating">⭐ {dish.rating}</div>
             <div className="dish-price">${dish.price}</div>
-            <button className="add-to-cart-btn">+</button>
           </div>
         ))}
       </div>

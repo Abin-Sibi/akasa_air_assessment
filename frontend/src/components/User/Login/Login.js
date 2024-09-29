@@ -34,6 +34,12 @@ const Login = () => {
         // Handle successful response
         alert('Login successful');
         console.log(response.data);
+        const {message,token,user}= response.data
+        console.log(message,token,user,'hfdasd')
+        localStorage.setItem('token', token);
+
+        // Store user details in localStorage (convert object to JSON string)
+        localStorage.setItem('user', JSON.stringify(user));
           navigate('/home')
       })
       .catch(error => {
@@ -73,7 +79,7 @@ const Login = () => {
                 <ErrorMessage name="password" component="div" className="error-message" />
               </div>
 
-              <button type="submit" className="submit-button" disabled={isSubmitting}>
+              <button type="submit" className="user-submit-button" disabled={isSubmitting}>
                 {isSubmitting ? 'Logging in...' : 'Login'}
               </button>
             </Form>

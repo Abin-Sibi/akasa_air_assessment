@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './SideBar.css';
+import { Link } from 'react-router-dom';  // Import Link for routing
 
 const Sidebar = ({ isCollapsed, toggleSidebar }) => {
-  
     return (
         <div className={isCollapsed ? "sidebar collapsed" : "sidebar"}>
             <div className="sidebar-header">
@@ -14,23 +14,22 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
                 </div>
             </div>
             <div className="menu">
-                <a href="#" className="menu-item active">
+                <Link to="/home" className="menu-item active">
                     <i className="icon">🏠</i>
                     {!isCollapsed && <span>Home</span>}
-                </a>
-                <a href="#" className="menu-item">
+                </Link>
+                <Link to="/home/foodorder" className="menu-item">
                     <i className="icon">🍴</i>
                     {!isCollapsed && <span>Food Order</span>}
-                </a>
-                <a href="#" className="menu-item">
+                </Link>
+                <Link to="#" className="menu-item">
                     <i className="icon">📜</i>
                     {!isCollapsed && <span>Order History</span>}
-                </a>
+                </Link>
             </div>
-            {/* Change upgrade card to logout icon when collapsed */}
             <div className={isCollapsed ? "logout-card" : "upgrade-card"}>
                 {isCollapsed ? (
-                    <i className="icon logout-icon">🔒</i> // Logout icon
+                    <i className="icon logout-icon">🔒</i>
                 ) : (
                     <>
                         <p>Upgrade your Account to Get Free Voucher</p>

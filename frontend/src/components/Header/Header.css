@@ -28,3 +28,30 @@
     font-size: 20px; /* Adjust icon size */
     cursor: pointer; /* Change cursor to pointer */
 }
+
+.cart-container {
+    position: relative;
+    display: inline-block;
+}
+
+.icon {
+    font-size: 24px; /* Adjust size as needed */
+    position: relative;
+    cursor: pointer;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -10px;  /* Adjust for positioning */
+    right: -10px;  /* Adjust for positioning */
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Dashboard.css';
 import axios from '../../../config/axiosConfig';
 import SideBar from '../AdminSideBar/SideBar';
@@ -11,8 +11,9 @@ const Dashboard = () => {
     description: '',
     category: '',
     stock: '',
-    image: null // To handle image
   });
+
+  const [foodItems,setFoodItems] = useState([])
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
@@ -26,31 +27,69 @@ const Dashboard = () => {
     }));
   };
 
+  // Fetch all food items from the API
+  const fetchFoodItems = async () => {
+    try {
+      const response = await axios.get('/get-all-food'); // Change API endpoint accordingly
+      setFoodItems(response.data); // Update state with fetched food items
+    } catch (error) {
+      console.error('Error fetching food items:', error);
+    }
+  };
+
+  const [categories, setCategories] = useState([]); // To store the fetched categories
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get('/get-categories'); // Adjust endpoint as needed
+      setCategories(response.data); // Set the fetched categories in state
+      console.log(response.data,'hhh')
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchFoodItems();
+    fetchCategories(); // Fetch the food items initially
+  }, [showModal]);
+
+
+
   // Handle image upload
   const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    console.log(file); // Check if the file is being selected
     setFormData((prev) => ({
       ...prev,
-      image: e.target.files[0] // File input
+      image: file // Ensure the file is correctly set in the state
     }));
   };
+  
 
   // Handle form submission (API call)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!formData.image) {
+        alert('Please select an image.');
+        return;
+      }
     // First, upload the image to Cloudinary
     const formDataToUpload = new FormData();
     formDataToUpload.append('file', formData.image);
     formDataToUpload.append('upload_preset', 'kjadhf739'); // Cloudinary preset
 
+    
+
     try {
-        console.log('kllll')
       const cloudinaryResponse = await axios.post(
         'https://api.cloudinary.com/v1_1/dp2p38wb5/image/upload',
         formDataToUpload
-      );
+        , { headers: { 'Content-Type': 'multipart/form-data' } }, { withCredentials: false });
 
       const imageUrl = cloudinaryResponse.data.secure_url;
+
       
 
       // Now, send the rest of the data, including the image URL, to your backend
@@ -59,6 +98,7 @@ const Dashboard = () => {
         imageUrl // Add the image URL to the data
       };
 
+      console.log(foodItemData,'yiuiuiuiu')
       const response = await axios.post('/add-food-item', foodItemData);
       alert('Food item added successfully!');
       closeModal();
@@ -75,6 +115,17 @@ const Dashboard = () => {
         <h1>Admin Dashboard</h1>
         <p>Welcome to the Admin Panel</p>
         <button onClick={openModal}>Add Product</button>
+
+        <div className="food-items-list">
+          <h2>Food Items</h2>
+          <ul>
+            {foodItems.map((item) => (
+              <li key={item._id}>
+                {item.foodName} - ${item.price} - {item.category} (Stock: {item.stock})
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       {/* Modal Form */}
@@ -117,15 +168,21 @@ const Dashboard = () => {
                 />
               </div>
               <div>
-                <label>Category</label>
-                <input
-                  type="text"
-                  name="category"
-                  value={formData.category}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+        <label>Category</label>
+        <select
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          required
+        >
+          <option value="" disabled>Select a category</option>
+          {categories.map((category) => (
+            <option key={category._id} value={category.categoryName}>
+              {category.categoryName}
+            </option>
+          ))}
+        </select>
+      </div>
               <div>
                 <label>Stock</label>
                 <input

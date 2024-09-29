@@ -2,7 +2,7 @@ const FoodItem = require('../models/foodItemModel');
 
 // Function to add a new food item
 const addFoodItem = async (req, res) => {
-  const { foodName, price, description, category, stock } = req.body;
+  const { foodName, price, description, category, stock,image,imageUrl } = req.body;
   console.log('helll',req.body)
 
   // Validate required fields
@@ -10,14 +10,14 @@ const addFoodItem = async (req, res) => {
     return res.status(400).json({ message: 'All fields are required' });
   }
 
-  try {
-    // Create a new food item
+  try {  
     const newFoodItem = new FoodItem({
       foodName,
       price,
       description,
       category,
       stock,
+      imageUrl,
     });
 
     // Save the food item to the database

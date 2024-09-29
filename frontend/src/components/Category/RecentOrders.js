@@ -55,7 +55,7 @@ const RecentOrders = () => {
       <div className="recent-orders-header">
         <h2>Recent Order</h2>
         <a href="#" className="view-all">
-          View all &gt;
+          View order history &gt;
         </a>
       </div>
       <div className="orders-list">

@@ -30,13 +30,19 @@
     justify-content: space-between;
   }
   
+  .category-list img {
+    margin-right: 0;
+  }
+
   .category-item {
     width: 120px;
     background-color: #fff;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    /* align-content: center;
+    text-align: center; */
+    /* align-self: center; */
     transition: transform 0.3s ease;
   }
   
@@ -54,4 +60,12 @@
     font-weight: 500;
     color: #333;
   }
+
+  .category-image {
+    width: 50px; /* Adjust the size as needed */
+    height: 50px;
+    object-fit: cover; /* To ensure the image fits within the boundaries */
+    border-radius: 50%; /* If you want the image to be circular */
+  }
+  
   
