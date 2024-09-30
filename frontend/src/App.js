@@ -1,24 +1,24 @@
 import './App.css';
 import AdminLogin from './components/Admin/AdminLogin/AdminLogin';
-import Category from './components/Admin/CategoryManagement/Category';
-import Dashboard from './components/Admin/DashBoard/Dashboard';
 import LoginPage from './pages/LoginPage';
 import Main from './pages/Main';
-import FoodOrder from './components/FoodOrder/FoodOrder'; // Import your new component
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes,Navigate } from 'react-router-dom';
 import { CartProvider } from './cartContext';
+import AdminMain from './pages/AdminMain';
 
 function App() {
+  const token = localStorage.getItem('token'); // Check for the token
+  const admintoken = localStorage.getItem('admintoken'); // Check for the token
+
   return (
     <div className="App">
       <CartProvider>
         <Router>
           <Routes>
             <Route path="/" element={<LoginPage />} />
-            <Route path="/home/*" element={<Main />} /> {/* Add trailing * */}
             <Route path="/admin" element={<AdminLogin />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/category" element={<Category />} />
+            <Route path="/home/*" element={token ? <Main /> : <Navigate to="/" />}/>
+            <Route path="/adminhome/*" element={admintoken ? <AdminMain />: <Navigate to ="/admin" />} />
           </Routes>
         </Router>
       </CartProvider>

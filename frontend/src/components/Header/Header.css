@@ -3,13 +3,14 @@
     position: fixed; /* Keep the header at the top */
     top: 0;
     right: 0; /* Align to the right */
-    width: 25vw; /* Set width to half of the viewport width */
-    background-color: transparent; /* Transparent background */
+    width: 100vw; /* Set width to half of the viewport width */
+    background-color: #f9f9f9; /* Transparent background */
     padding: 15px 30px; /* Add some padding */
     display: flex; /* Use flexbox for alignment */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     justify-content: flex-end; /* Align items to the right */
     align-items: center; /* Center items vertically */
-    z-index: 1000; /* Ensure it stays above other content */
+    z-index: 8; /* Ensure it stays above other content */
 }
 
 .header-content {

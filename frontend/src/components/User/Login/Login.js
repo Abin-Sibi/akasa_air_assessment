@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from '../../../config/axiosConfig';
 import './Login.css';  // CSS file for styling
 import { useNavigate } from 'react-router-dom';
 
-
 const Login = () => {
   
+  const navigate = useNavigate();
+
+
+
   // Initial values for the form
   const initialValues = {
     email: '',
     password: '',
   };
-
-  const navigate = useNavigate();
 
   // Validation schema using Yup
   const validationSchema = Yup.object().shape({
@@ -28,24 +29,15 @@ const Login = () => {
 
   // Form submission handler
   const onSubmit = (values, { setSubmitting, setFieldError }) => {
-    // Example API call using Axios
     axios.post('/login', values)
       .then(response => {
-        // Handle successful response
-        alert('Login successful');
-        console.log(response.data);
-        const {message,token,user}= response.data
-        console.log(message,token,user,'hfdasd')
+        const { message, token, user } = response.data;
         localStorage.setItem('token', token);
-
-        // Store user details in localStorage (convert object to JSON string)
         localStorage.setItem('user', JSON.stringify(user));
-          navigate('/home')
+        navigate('/home');
       })
       .catch(error => {
-        // Handle errors
         if (error.response && error.response.data) {
-          // Display backend validation error message if any
           setFieldError('email', error.response.data.message || 'Login failed');
         } else {
           alert('An error occurred. Please try again.');
@@ -91,4 +83,3 @@ const Login = () => {
 };
 
 export default Login;
-

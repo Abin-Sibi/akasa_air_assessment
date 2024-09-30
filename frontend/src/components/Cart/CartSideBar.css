@@ -9,7 +9,7 @@
     border-radius: 50%;
     cursor: pointer;
     font-size: 24px;
-    z-index: 1001;
+    z-index: 10;
   }
   
   /* Sidebar */
@@ -138,14 +138,87 @@
     color: white;
   }
   
-  /* Overlay */
   .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity to make the background dull */
+    z-index: 9; /* Keep this below the modal but above everything else */
   }
   
+  /* Custom Modal Styles */
+  .custom-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Overlay background for the modal */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20; /* Modal content on top of everything */
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 30; /* Ensure modal content is above overlay */
+  }
+  
+  .checkout-items {
+    margin-bottom: 20px;
+  }
+  
+  .checkout-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .checkout-item img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  .checkout-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .out-of-stock-text {
+    color: red;
+  }
+  
+  .payment-method select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
+  .order-btn, .close-modal-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .order-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+  }
+  
+  .close-modal-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    margin-left: 10px;
+  }

@@ -10,6 +10,7 @@ const itemRoutes = require('./routes/itemRoutes')
 const adminRoutes = require('./routes/adminRoutes')
 const categoryRoutes = require('./routes/categoryRoutes')
 const cartRoutes = require('./routes/cartRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 
 
 const app = express();
@@ -25,5 +26,6 @@ app.use('/api',itemRoutes);
 app.use('/api',adminRoutes);
 app.use('/api',categoryRoutes)
 app.use('/api/cart', cartRoutes);
+app.use('/api', orderRoutes);
 
 app.listen(port,()=>{console.log(`Server started on the port ${port}`)})

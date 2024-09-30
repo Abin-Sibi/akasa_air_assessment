@@ -10,5 +10,8 @@ router.get('/:userId', cartController.getCart);
 
 // Route to checkout the cart
 router.post('/checkout', cartController.checkoutCart);
+router.get('/order-history/:userId', cartController.getOrderHistory);
+router.put('/update-quantity', cartController.updateCartQuantity);
+router.delete('/remove', cartController.removeFromCart);
 
 module.exports = router;

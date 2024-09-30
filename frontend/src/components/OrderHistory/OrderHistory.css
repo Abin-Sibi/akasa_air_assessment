@@ -1,0 +1,60 @@
+.order-history {
+    padding: 80px;
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 8px; /* Rounded corners for the overall container */
+}
+
+.order-history-heading {
+    font-size: 24px; /* Heading font size */
+    font-weight: bold; /* Bold for emphasis */
+    margin-bottom: 20px; /* Space below the heading */
+    color: #333; /* Dark color for contrast */
+}
+
+.order-card {
+    background-color: #fff;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* To position the badge */
+}
+
+.order-card h3, .order-card p {
+    margin: 0 0 10px;
+}
+
+.order-items {
+    margin-top: 10px;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.order-item p {
+    margin: 0;
+    color: #555; /* Slightly lighter color for item text */
+}
+
+/* Badge styles */
+.badge {
+    position: absolute; /* Positioning relative to the card */
+    top: 20px;
+    right: 20px;
+    padding: 5px 10px;
+    border-radius: 12px;
+    color: #fff; /* Text color */
+    font-weight: bold;
+}
+
+.delivered {
+    background-color: #28a745; /* Green for delivered */
+}
+
+.not-delivered {
+    background-color: #dc3545; /* Red for not delivered */
+}

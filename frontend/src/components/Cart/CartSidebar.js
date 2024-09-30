@@ -3,25 +3,105 @@ import './CartSideBar.css';
 import axios from '../../config/axiosConfig';
 import { useCart } from '../../cartContext';
 
-
 const CartSidebar = ({ isOpen, toggleCart }) => {
   const [cartItems, setCartItems] = useState([]);
+  const [isCheckoutOpen, setCheckoutOpen] = useState(false); 
+  const [paymentMethod, setPaymentMethod] = useState('');
   const user = JSON.parse(localStorage.getItem('user'));
   const { addToCart } = useCart();
 
-  // Fetch cart items when the sidebar opens
   useEffect(() => {
-      axios.get(`/cart/${user._id}`).then((response) => {
-        setCartItems(response.data.cart); // Store the cart data in the state
-        addToCart(response.data.cart.length);
-      }).catch((error) => {
-        console.error('Error fetching cart data:', error);
-      });
+      axios
+        .get(`/cart/${user._id}`)
+        .then((response) => {
+          setCartItems(response.data.cart);
+          addToCart(response.data.cart.length);
+        })
+        .catch((error) => {
+          console.error('Error fetching cart data:', error);
+        });
   }, [isOpen]);
+
+  const toggleCheckoutModal = () => {
+    setCheckoutOpen(!isCheckoutOpen);
+  };
+
+  const handleRemoveItem = (productId) => {
+    setCartItems(cartItems.filter(item => item.productId !== productId));
+    axios.delete('/cart/remove', { 
+        data: { userId: user._id, productId } // Send the data in the 'data' property
+      })
+      .then(() => {
+        console.log('Item removed successfully');
+      })
+      .catch((error) => {
+        console.error('Error removing item:', error);
+      });
+  };
+
+  const handleIncreaseQuantity = (productId) => {
+    setCartItems(
+      cartItems.map((item) =>
+        item.productId === productId ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+    axios.put('/cart/update-quantity',{userId:user._id,productId,quantityChange:1})
+      .then(() => {
+        console.log('Quantity increased');
+      })
+      .catch((error) => {
+        console.error('Error increasing quantity:', error);
+      });
+  };
+
+  const handleDecreaseQuantity = (productId) => {
+    const item = cartItems.find(item => item.productId === productId);
+    if (item.quantity > 1) {
+      setCartItems(
+        cartItems.map((item) =>
+          item.productId === productId ? { ...item, quantity: item.quantity - 1 } : item
+        )
+      );
+      axios.put('/cart/update-quantity',{userId:user._id,productId,quantityChange:-1})
+        .then(() => {
+          console.log('Quantity decreased');
+        })
+        .catch((error) => {
+          console.error('Error decreasing quantity:', error);
+        });
+    }
+  };
+
+  const handlePaymentChange = (e) => {
+    setPaymentMethod(e.target.value);
+  };
+
+  const handlePlaceOrder = () => {
+    if (!paymentMethod) {
+      alert('Please select a payment method!');
+      return;
+    }
+
+    const orderData = {
+      userId: user._id,
+      paymentMethod,
+    };
+
+    axios
+      .post('/cart/checkout', orderData)
+      .then((response) => {
+        alert('Order placed successfully!');
+        setCheckoutOpen(false);
+        toggleCart();
+      })
+      .catch((error) => {
+        console.error('Error placing order:', error);
+        alert('Failed to place order. Please try again.');
+      });
+  };
 
   return (
     <>
-      {/* Sidebar */}
       <div className={`cart-sidebar ${isOpen ? 'open' : ''}`}>
         <div className="cart-header">
           <h2>Your Cart</h2>
@@ -37,16 +117,20 @@ const CartSidebar = ({ isOpen, toggleCart }) => {
           <button className="address-btn">Add Details</button>
         </div>
 
-        {/* Order Menu - Dynamically rendering the cart items */}
         <div className="order-menu">
           <h3>Order Menu</h3>
           {cartItems.length > 0 ? (
             cartItems.map((item) => (
               <div key={item.productId} className="order-item">
-                {/* Assuming you fetch product details including the image */}
                 <img src={item.image} alt="Product" />
-                <p>{item.foodName} x{item.quantity}</p>
-                <p>+${item.updatedPrice}</p>
+                <p>{item.foodName}</p>
+                <div className="quantity-controls">
+                  <button onClick={() => handleDecreaseQuantity(item.productId)}>-</button>
+                  <span>{item.quantity}</span>
+                  <button onClick={() => handleIncreaseQuantity(item.productId)}>+</button>
+                </div>
+                <p>${item.updatedPrice * item.quantity}</p>
+                <button className="remove-btn" onClick={() => handleRemoveItem(item.productId)}>Remove</button>
               </div>
             ))
           ) : (
@@ -55,15 +139,56 @@ const CartSidebar = ({ isOpen, toggleCart }) => {
         </div>
 
         <div className="order-summary">
-          {/* Calculating total price */}
           <p>Service: +$1.00</p>
           <p>Total: ${cartItems.reduce((total, item) => total + item.updatedPrice * item.quantity, 1)}</p>
-          <button className="checkout-btn">Checkout</button>
+          <button className="checkout-btn" onClick={toggleCheckoutModal}>Checkout</button>
         </div>
       </div>
 
-      {/* Overlay */}
       {isOpen && <div className="overlay" onClick={toggleCart}></div>}
+
+      {isCheckoutOpen && (
+        <div className="custom-modal">
+          <div className="modal-content">
+            <h2>Checkout Details</h2>
+
+            <div className="checkout-items">
+              {cartItems.length > 0 ? (
+                cartItems.map((item) => (
+                  <div key={item.productId} className={`checkout-item ${item.stock === 0 ? 'out-of-stock' : ''}`}>
+                    <img src={item.image} alt="Product" />
+                    <div className="checkout-details">
+                      <p>{item.foodName} x{item.quantity}</p>
+                      <p>${item.updatedPrice * item.quantity}</p>
+                      {item.stock === 0 && (
+                        <p className="out-of-stock-text">Out of Stock</p>
+                      )}
+                      <button className="remove-btn" onClick={() => handleRemoveItem(item.productId)}>
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p>Your cart is empty</p>
+              )}
+            </div>
+
+            <div className="payment-method">
+              <h3>Select Payment Method</h3>
+              <select value={paymentMethod} onChange={handlePaymentChange}>
+                <option value="">Select</option>
+                <option value="credit-card">Credit Card</option>
+                <option value="paypal">PayPal</option>
+                <option value="cash">Cash on Delivery</option>
+              </select>
+            </div>
+
+            <button className="order-btn" onClick={handlePlaceOrder}>Place Order</button>
+            <button className="close-modal-btn" onClick={toggleCheckoutModal}>Close</button>
+          </div>
+        </div>
+      )}
     </>
   );
 };

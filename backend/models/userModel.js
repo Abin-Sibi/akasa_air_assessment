@@ -12,6 +12,21 @@ const userSchema = new mongoose.Schema({
           image:String,
           addedAt: { type: Date, default: Date.now }
         }
+      ],
+      orders: [
+        {
+          orderId: { type: mongoose.Schema.Types.ObjectId, ref: 'Order' },
+          total: Number,
+          createdAt: { type: Date, default: Date.now },
+          items: [
+            {
+              productId: { type: mongoose.Schema.Types.ObjectId, ref: 'FoodItem' },
+              foodName: String,
+              quantity: Number,
+              price: Number
+            }
+          ]
+        }
       ]
 })
 

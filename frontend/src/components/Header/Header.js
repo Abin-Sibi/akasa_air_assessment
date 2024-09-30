@@ -8,7 +8,7 @@ import { useCart } from '../../cartContext';
 const Header = () => {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const { cartCount } = useCart();
-    console.log(cartCount,'kkjkj')
+    const user = JSON.parse(localStorage.getItem('user'));
 
     const toggleCart = () => {
         setIsCartOpen(!isCartOpen);
@@ -23,7 +23,7 @@ const Header = () => {
                             <span className="cart-badge">{cartCount}</span>
                         )}
                     </div>
-                    <span className="welcome-message">Welcome, Abin</span>
+                    <span className="welcome-message">Welcome, {user.name}</span>
                     <FaUserCircle className="icon" />
 
                 </div>

@@ -16,9 +16,9 @@
   }
   
   .sidebar-header {
-    padding: 20px;
+    padding: 20px 20px 20px 15px;
     display: flex;
-    justify-content: space-between;
+    gap:30px;
     align-items: center;
   }
   

@@ -53,7 +53,7 @@ const Category = () => {
         fetchCategories(); // Fetch categories on component mount
       }, []);
   return (
-    <div className="category-container">
+    <div className="user-category-container ">
       <div className="category-header">
         <h2>Category</h2>
         <a href="#" className="view-all">

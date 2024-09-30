@@ -18,3 +18,11 @@
 .not-collapsed{
     margin-left: 250px;
 }
+
+.admin-content-collapsed {
+    margin-left: 250px; /* Adjust based on your collapsed sidebar width */
+}
+
+.admin-not-collapsed{
+    margin-left: 50px;
+}

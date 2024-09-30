@@ -34,7 +34,9 @@ const AdminLogin = () => {
         // Handle successful response
         alert('Login successful');
         console.log(response.data);
-          navigate('/dashboard')
+        const {adminToken,admin,message} = response.data;
+        localStorage.setItem('admintoken', adminToken);
+          navigate('/adminhome')
       })
       .catch(error => {
         // Handle errors
