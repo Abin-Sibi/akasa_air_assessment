@@ -31,4 +31,99 @@ const loginUser = async (req,res)=>{
     }
 }
 
-module.exports = {registerUser,loginUser}
+
+// Route to add an address for a specific user
+// exports.post('/:userId/address', 
+   const addAddress= async (req, res) => {
+  const { userId } = req.params;
+  console.log('helloo',req.body)
+  const address = req.body; // The address data is expected in the request body
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Set the default flag to true if it's the first address
+    if (user.addresses.length === 0) {
+      address.default = true;
+    }
+
+    user.addresses.push(address);
+    await user.save();
+
+    res.status(200).json({ message: 'Address added successfully', addresses: user.addresses });
+  } catch (error) {
+    res.status(500).json({ message: 'Error adding address', error });
+  }
+};
+
+// Route to get all addresses for a user
+// router.get('/:userId/addresses',
+    const getAddress = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(user.addresses);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching addresses', error });
+  }
+};
+
+// Route to update an existing address
+// router.put('/:userId/address/:addressId',
+    const editAddress = async (req, res) => {
+  const { userId, addressId } = req.params;
+  const updatedAddress = req.body;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const addressIndex = user.addresses.findIndex(addr => addr._id.toString() === addressId);
+    if (addressIndex === -1) {
+      return res.status(404).json({ message: 'Address not found' });
+    }
+
+    user.addresses[addressIndex] = { ...user.addresses[addressIndex]._doc, ...updatedAddress };
+    await user.save();
+
+    res.status(200).json({ message: 'Address updated successfully', addresses: user.addresses });
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating address', error });
+  }
+};
+
+// Route to delete an address
+// router.delete('/:userId/address/:addressId',
+    
+    const deleteAddress = async (req, res) => {
+  const { userId, addressId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    user.addresses = user.addresses.filter(addr => addr._id.toString() !== addressId);
+    await user.save();
+
+    res.status(200).json({ message: 'Address deleted successfully', addresses: user.addresses });
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting address', error });
+  }
+};
+
+
+
+
+module.exports = {registerUser,loginUser ,addAddress,editAddress,getAddress,deleteAddress}

@@ -46,9 +46,12 @@ const OrderList = () => {
               <span className="admin-order-status">{order.status}</span>
             </div>
             <div className="admin-order-items">
+            <p>{order._id}</p>
+            <p>{order.deliveryAddress}</p>
               {order.items.map((item, index) => (
                 <div className="admin-order-item" key={index}>
-                  {item.productId.name} - {item.quantity} x ${item.price}
+                    
+                  {item.productId.foodName} - {item.quantity} x ${item.price}
                 </div>
               ))}
             </div>

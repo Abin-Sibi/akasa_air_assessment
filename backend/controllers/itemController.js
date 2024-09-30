@@ -29,10 +29,55 @@ const addFoodItem = async (req, res) => {
   }
 };
 
+// router.put('/update-food-item/:id',
+const updateItem = async (req, res) => {
+    const { id } = req.params;
+    const { foodName, price, description, category, stock, imageUrl } = req.body;
+  
+    try {
+      // Find food item by ID and update
+      const updatedFoodItem = await FoodItem.findByIdAndUpdate(
+        id,
+        {
+          foodName,
+          price,
+          description,
+          category,
+          stock,
+          imageUrl,
+        },
+        { new: true } // Return the updated document
+      );
+  
+      if (!updatedFoodItem) {
+        return res.status(404).json({ message: 'Food item not found' });
+      }
+  
+      res.status(200).json({ message: 'Food item updated successfully', updatedFoodItem });
+    } catch (error) {
+      console.error('Error updating food item:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  };
 
-const updateItem = (req,res)=>{
-    res.send('updating intem')
-}
+
+//   router.delete('/delete-food-item/:id',
+  const deleteFoodItem =  async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      const deletedFoodItem = await FoodItem.findByIdAndDelete(id);
+  
+      if (!deletedFoodItem) {
+        return res.status(404).json({ message: 'Food item not found' });
+      }
+  
+      res.status(200).json({ message: 'Food item deleted successfully' });
+    } catch (error) {
+      console.error('Error deleting food item:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  }
 
 const getAllfood = async (req, res) => {
     try {
@@ -43,4 +88,4 @@ const getAllfood = async (req, res) => {
     }
   };
 
-module.exports = {addFoodItem,updateItem,getAllfood}
+module.exports = {addFoodItem,updateItem,getAllfood,deleteFoodItem}

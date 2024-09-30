@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Category.css';
 import axios from '../../config/axiosConfig';
+import { useNavigate } from 'react-router-dom';
 
 // const categories = [
 //   {
@@ -36,8 +37,13 @@ import axios from '../../config/axiosConfig';
 // ];
 
 const Category = () => {
+    const navigate = useNavigate();
     
     const [categories, setCategories] = useState([]);
+
+    const gotoItemList = (categoryname) => {
+        navigate('foodorder', { state: { category:categoryname } }); // passing cartItems as state
+      };
 
     const fetchCategories = async () => {
 
@@ -62,8 +68,8 @@ const Category = () => {
       </div>
       <div className="category-list">
   {categories.map((category) => (
-    <div key={category.id} className="category-item">
-      <div className="category-icon">
+    <div key={category.id} className="category-item" >
+       <div className="category-icon" onClick={() => gotoItemList(category.categoryName)}>
         <img src={category.imageUrl} alt={category.categoryName} className="category-image" />
       </div>
       <div className="category-name">{category.categoryName}</div>

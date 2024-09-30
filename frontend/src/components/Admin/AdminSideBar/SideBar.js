@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaBars, FaHome, FaUser, FaCog, FaSignOutAlt,FaListAlt } from 'react-icons/fa';
+import { FaBars, FaHome, FaUser, FaCog, FaSignOutAlt,FaListAlt, FaTags } from 'react-icons/fa';
 import './AdminSide.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,8 +25,7 @@ const SideBar = ({ isCollapsed, toggleSidebar }) => {
       </div>
       <ul className="sidebar-menu">
         <li onClick={() => navigate('/adminhome')}><FaHome />{isCollapsed && <span>Dashboard</span>}</li>
-        <li onClick={() => navigate('/adminhome/category')}><FaCog />{isCollapsed && <span>Category</span>}</li>
-        <li onClick={() => navigate('/users')}><FaUser />{isCollapsed && <span>Users</span>}</li>
+        <li onClick={() => navigate('/adminhome/category')}><FaTags />{isCollapsed && <span>Category</span>}</li>
         <li onClick={() => navigate('/adminhome/orderlist')}><FaListAlt />{isCollapsed && <span>Orders</span>}</li>
       
         <li onClick={handleLogout}><FaSignOutAlt />{isCollapsed && <span>Logout</span>}</li>

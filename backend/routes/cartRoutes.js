@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const cartController = require('../controllers/cartController');
 
+
 // Route to add items to the cart
 router.post('/add-to-cart', cartController.addToCart);
 

@@ -12,9 +12,13 @@ const Dashboard = () => {
     stock: '',
   });
 
+  const [isEdit, setIsEdit] = useState(false);
+
   const [foodItems, setFoodItems] = useState([]);
 
-  const openModal = () => setShowModal(true);
+  const openModal = () => {setShowModal(true);
+setIsEdit(false)
+  };
   const closeModal = () => setShowModal(false);
 
   const handleChange = (e) => {
@@ -58,38 +62,112 @@ const Dashboard = () => {
     }));
   };
 
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     if (!formData.image) {
+//       alert('Please select an image.');
+//       return;
+//     }
+
+//     const formDataToUpload = new FormData();
+//     formDataToUpload.append('file', formData.image);
+//     formDataToUpload.append('upload_preset', 'kjadhf739');
+
+//     try {
+//       const cloudinaryResponse = await axios.post(
+//         'https://api.cloudinary.com/v1_1/dp2p38wb5/image/upload',
+//         formDataToUpload,
+//         { headers: { 'Content-Type': 'multipart/form-data' } }
+//       );
+
+//       const imageUrl = cloudinaryResponse.data.secure_url;
+//       const foodItemData = {
+//         ...formData,
+//         imageUrl,
+//       };
+
+//       await axios.post('/add-food-item', foodItemData);
+//       alert('Food item added successfully!');
+//       closeModal();
+//     } catch (error) {
+//       alert('Error adding food item');
+//       console.error(error);
+//     }
+//   };
+
+
+
+  const handleEdit = (item) => {
+    setFormData({
+      _id: item._id, // Required for updating
+      foodName: item.foodName,
+      price: item.price,
+      description: item.description,
+      category: item.category,
+      stock: item.stock,
+      imageUrl: item.imageUrl,
+    });
+    setIsEdit(true);
+    setShowModal(true);
+  };
+  
+
+  
+
+  
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure you want to delete this item?')) {
+      try {
+        await axios.delete(`/delete-food-item/${id}`);
+        alert('Food item deleted successfully!');
+        fetchFoodItems(); // Re-fetch the updated list
+      } catch (error) {
+        console.error('Error deleting food item:', error);
+      }
+    }
+  };
+
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.image) {
+  
+    if (!formData.image && !isEdit) {
       alert('Please select an image.');
       return;
     }
-
-    const formDataToUpload = new FormData();
-    formDataToUpload.append('file', formData.image);
-    formDataToUpload.append('upload_preset', 'kjadhf739');
-
-    try {
-      const cloudinaryResponse = await axios.post(
-        'https://api.cloudinary.com/v1_1/dp2p38wb5/image/upload',
-        formDataToUpload,
-        { headers: { 'Content-Type': 'multipart/form-data' } }
-      );
-
-      const imageUrl = cloudinaryResponse.data.secure_url;
-      const foodItemData = {
-        ...formData,
-        imageUrl,
-      };
-
-      await axios.post('/add-food-item', foodItemData);
-      alert('Food item added successfully!');
-      closeModal();
-    } catch (error) {
-      alert('Error adding food item');
-      console.error(error);
+  
+    let foodItemData = { ...formData };
+  
+    if (isEdit) {
+      // Editing an existing food item
+      try {
+        await axios.put(`/update-food-item/${formData._id}`, foodItemData);
+        alert('Food item updated successfully!');
+      } catch (error) {
+        console.error('Error updating food item:', error);
+      }
+    } else {
+      // Creating a new food item
+      try {
+        if (formData.image) {
+          const formDataToUpload = new FormData();
+          formDataToUpload.append('file', formData.image);
+          formDataToUpload.append('upload_preset', 'your_preset');
+          const cloudinaryResponse = await axios.post('https://api.cloudinary.com/v1_1/dp2p38wb5/image/upload', formDataToUpload, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+          });
+          foodItemData.imageUrl = cloudinaryResponse.data.secure_url;
+        }
+        await axios.post('/add-food-item', foodItemData);
+        alert('Food item added successfully!');
+      } catch (error) {
+        console.error('Error adding food item:', error);
+      }
     }
+    closeModal();
+    fetchFoodItems();
   };
+  
 
   return (
     <div className="admin-dashboard">
@@ -101,26 +179,36 @@ const Dashboard = () => {
         <div className="food-items-list">
           <h2>Food Items</h2>
           <table>
-            <thead>
-              <tr>
-                <th>Food Name</th>
-                <th>Price</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Stock</th>
-              </tr>
-            </thead>
-            <tbody>
-              {foodItems.map((item) => (
-                <tr key={item._id}>
-                  <td>{item.foodName}</td>
-                  <td>${item.price}</td>
-                  <td>{item.category}</td>
-                  <td>{item.description}</td>
-                  <td>{item.stock}</td>
-                </tr>
-              ))}
-            </tbody>
+          <thead>
+  <tr>
+    <th>Image</th>
+    <th>Food Name</th>
+    <th>Price</th>
+    <th>Category</th>
+    <th>Description</th>
+    <th>Stock</th>
+    <th>Actions</th>
+  </tr>
+</thead>
+<tbody>
+  {foodItems.map((item) => (
+    <tr key={item._id}>
+      <td>
+        <img src={item.imageUrl} alt={item.foodName} style={{ width: '50px', height: '50px', objectFit: 'cover' }} />
+      </td>
+      <td>{item.foodName}</td>
+      <td>${item.price}</td>
+      <td>{item.category}</td>
+      <td>{item.description}</td>
+      <td>{item.stock}</td>
+      <td>
+        <button onClick={() => handleEdit(item)}>Edit</button>
+        <button onClick={() => handleDelete(item._id)}>Delete</button>
+      </td>
+    </tr>
+  ))}
+</tbody>
+
           </table>
         </div>
       </div>
@@ -163,7 +251,7 @@ const Dashboard = () => {
                   required
                 />
               </div>
-              <div>
+              {isEdit? '':<div>
                 <label>Category</label>
                 <select
                   name="category"
@@ -175,12 +263,13 @@ const Dashboard = () => {
                     Select a category
                   </option>
                   {categories.map((cat) => (
-                    <option key={cat._id} value={cat.name}>
-                      {cat.name}
+                    <option key={cat._id} value={cat.categoryName}>
+                      {cat.categoryName}
                     </option>
                   ))}
                 </select>
-              </div>
+              </div>}
+              
               <div>
                 <label>Stock</label>
                 <input
@@ -191,11 +280,12 @@ const Dashboard = () => {
                   required
                 />
               </div>
+              {isEdit? '':
               <div>
                 <label>Image</label>
                 <input type="file" onChange={handleImageChange} required />
-              </div>
-              <button type="submit">Add Product</button>
+              </div>}
+              {isEdit?<button type="submit">Update Product</button>:<button type="submit">Add Product</button>}
             </form>
           </div>
         </div>

@@ -14,34 +14,34 @@
   
   /* Sidebar */
   .cart-sidebar {
-    position: fixed;
-    top: 0;
-    right: -400px; /* Initially hidden */
     width: 400px;
-    height: 100%;
+    height: 100vh;
+    overflow-y: auto;
     background-color: #fff;
-    transition: right 0.3s ease;
-    box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+    position: fixed;
+    right: 0;
+    top: 0;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%);
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    z-index: 10;
   }
   
   .cart-sidebar.open {
-    right: 0; /* Slide in */
+    transform: translateX(0);
   }
   
-  /* Cart Header */
   .cart-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid #ddd;
   }
   
-  .close-btn {
-    background: none;
+  .close-btn1 {
+    background-color: gray;
     border: none;
     font-size: 30px;
     cursor: pointer;
@@ -65,11 +65,6 @@
     color: #fff;
   }
   
-  .balance-actions {
-    display: flex;
-    gap: 10px;
-  }
-  
   .balance-btn {
     background-color: #fff;
     border: none;
@@ -79,8 +74,71 @@
   }
   
   /* Address Section */
-  .address-section {
-    margin: 20px 0;
+
+/* Address Section */
+.address-section {
+    padding: 16px;
+  }
+  
+  .address-list {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr; /* Adjust for more columns if needed */
+  }
+  
+  .address-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .address-card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .address-details p {
+    margin: 0;
+    font-size: 16px;
+  }
+  
+  .address-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 8px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .edit-btn:hover, .delete-btn:hover {
+    color: none !important;
+    border-radius: 50%;
+  }
+  
+  .add-address-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ffcc00;
+    border: none;
+  }  
+
+  /* .address-section, .order-menu {
+    padding: 16px;
+  }
+  
+  .address-section h3, .order-menu h3 {
+    margin-bottom: 12px;
   }
   
   .address-btn, .change-btn {
@@ -96,41 +154,100 @@
     background-color: transparent;
     color: #ffcc00;
     font-size: 14px;
-  }
+  } */
   
   /* Order Menu */
-  .order-menu {
-    margin: 20px 0;
+  /* Order Menu Section */
+.order-menu {
+    padding: 16px;
   }
   
-  .order-item {
+  .order-card {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    padding: 16px;
     margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
   }
   
-  .order-item img {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
+  .order-card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   }
   
-  /* Order Summary */
-  .order-summary {
-    margin-top: 20px;
+  .order-item-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 16px;
   }
   
-  .coupon-btn, .checkout-btn {
-    width: 100%;
-    padding: 15px;
+  .order-item-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 16px;
+  }
+  
+  .food-name {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .quantity-controls button {
+    background-color: #ffcc00;
     border: none;
-    margin-top: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.2s;
   }
   
-  .coupon-btn {
-    background-color: #f7f7f7;
+  .quantity-controls button:hover {
+    background-color: #e0b800;
+  }
+  
+  .quantity-controls span {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .order-item-price {
+    min-width: 100px;
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .remove-btn {
+    background-color: transparent;
+    border: none;
+    color: #ff4d4d;
+    cursor: pointer;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  
+  .remove-btn:hover {
+    color: #e60000;
+  }
+  
+  /* Empty Cart Message */
+  .order-menu p {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
   }
   
   .checkout-btn {
@@ -138,28 +255,29 @@
     color: white;
   }
   
+  /* Overlay */
   .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity to make the background dull */
-    z-index: 9; /* Keep this below the modal but above everything else */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9;
   }
   
-  /* Custom Modal Styles */
+  /* Modal Styles */
   .custom-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Overlay background for the modal */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 20; /* Modal content on top of everything */
+    z-index: 20;
   }
   
   .modal-content {
@@ -169,56 +287,138 @@
     max-width: 500px;
     border-radius: 10px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-    z-index: 30; /* Ensure modal content is above overlay */
+    z-index: 30;
   }
   
-  .checkout-items {
-    margin-bottom: 20px;
-  }
-  
-  .checkout-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-  
-  .checkout-item img {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
-  }
-  
-  .checkout-details {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .out-of-stock-text {
-    color: red;
-  }
-  
-  .payment-method select {
-    width: 100%;
+  .save-btn, .close-modal-btn {
     padding: 10px;
-    margin-top: 10px;
-  }
-  
-  .order-btn, .close-modal-btn {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
   }
   
-  .order-btn {
+  .save-btn {
     background-color: #4CAF50;
     color: white;
-    border: none;
   }
   
   .close-modal-btn {
     background-color: #f44336;
     color: white;
-    border: none;
     margin-left: 10px;
   }
+  
+  /* Edit/Delete Button */
+  .edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 8px;
+  }
+  
+  .edit-btn img, .delete-btn img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Checkout Button */
+  .checkout-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  /* Form Input Styles */
+  .address-form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .address-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+
+  /* Checkout Items Styles */
+.checkout-items {
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .checkout-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .checkout-item:last-child {
+    border-bottom: none; /* Remove border from the last item */
+  }
+  
+  .item-details h4 {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .item-details p {
+    margin: 5px 0 0;
+    color: #666;
+  }
+  
+  .item-price p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #28a745;
+  }
+  
+  /* Payment Method Styles */
+  .payment-method {
+    margin-top: 20px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .payment-method h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .select-container {
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .select-container select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-size: 16px;
+  }
+  
+  .select-container select:focus {
+    outline: none;
+    border-color: #28a745;
+  }
+  

@@ -61,9 +61,6 @@
   }
   
   /* Button hover effect */
-  .submit-button:hover {
-    background-color: #e64a19;
-  }
   
   /* Error message styling */
   .error-message {

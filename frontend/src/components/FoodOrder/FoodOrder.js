@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from '../../config/axiosConfig';
 import './FoodOrder.css';
 import { useCart } from '../../cartContext';
+import { useLocation } from 'react-router-dom';
 
 const FoodOrder = () => {
     const [foodItems, setFoodItems] = useState([]);
@@ -10,6 +11,8 @@ const FoodOrder = () => {
     const [filterCategory, setFilterCategory] = useState('');
     const [sortOrder, setSortOrder] = useState('asc');
     const { addToCart, cartCount } = useCart();
+    const location = useLocation();
+  const { category } = location.state || {}; 
 
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -34,6 +37,11 @@ const FoodOrder = () => {
     useEffect(() => {
         fetchFoodItems();
         fetchCategories();
+        if(category){
+            setFilterCategory(category)
+        }else{
+            setFilterCategory('')
+        }
     }, [cartCount]);
 
     const handleSearch = (event) => {

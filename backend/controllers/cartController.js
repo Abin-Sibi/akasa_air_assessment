@@ -81,7 +81,7 @@ exports.getCart = async (req, res) => {
 
 // Checkout Cart
 exports.checkoutCart = async (req, res) => {
-    const { userId, paymentMethod } = req.body;
+    const { userId, paymentMethod,selectedAddress } = req.body;
   
     try {
       // Find the user
@@ -142,7 +142,8 @@ exports.checkoutCart = async (req, res) => {
         items: orderItems,
         total: total,
         status:"pending",
-        paymentMethod: paymentMethod // Add payment method to the order
+        paymentMethod: paymentMethod,
+        deliveryAddress:selectedAddress, // Add payment method to the order
       });
   
       await newOrder.save();
